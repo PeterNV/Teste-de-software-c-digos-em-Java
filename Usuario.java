@@ -29,15 +29,30 @@ public class Usuario {
     }
 
     // Getters e Setters
-    public String getNome() {
-        return nome;
+    public  String getNome() {
+        String regex = "^(?=.*[a-zA-ZÀ-ÖØ-öø-ÿ])[a-zA-ZÀ-ÖØ-öø-ÿ\\s]{3,32}$";
+        Pattern p = Pattern.compile(regex);
+        
+        Matcher m = p.matcher(nome);
+        if (m.matches()) {
+            return nome;
+        }
+        return null;
     }
 
     public void setNome(String nome) {
+    	
         this.nome = nome;
     }
     public String getSobrenome() {
-        return sobrenome;
+    	String regex = "^(?=.*[a-zA-ZÀ-ÖØ-öø-ÿ])[a-zA-ZÀ-ÖØ-öø-ÿ\\s]{3,32}$";
+        Pattern p = Pattern.compile(regex);
+        
+        Matcher m = p.matcher(sobrenome);
+        if (m.matches()) {
+            return sobrenome;
+        }
+        return null;
     }
 
     public void setSobrenome(String sobrenome) {
@@ -166,7 +181,7 @@ public class Usuario {
 				 
     }
     public void setCep(String cep) {
-    	this.csenha = cep;
+    	this.cep = cep;
     }
     
     public String getCep() {
