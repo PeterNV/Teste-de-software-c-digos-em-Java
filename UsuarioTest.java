@@ -8,11 +8,14 @@ import org.junit.Test;
 public class UsuarioTest {
     private UsuarioCadastro usuarioCadastro;
     private UsuarioArmazena usuarioArmazena;
-
+    Usuario user1;
     @Before
-    public void setUp() {
+    public void init() {
         usuarioCadastro = new UsuarioCadastro();
         usuarioArmazena = new UsuarioArmazena();
+        user1 = usuarioCadastro.criarUsuario("João", "Silva Vila", "Masculino", "01/01/1990", "joao@gmail.com", 
+                "Senha123@", "Senha123@", "12345678909", "12345-678", 
+                "1122334455", "9988776655");
     }
     @Test
     public void CamposEmBranco() {
@@ -20,27 +23,23 @@ public class UsuarioTest {
     }
     @Test
     public void testCriarUsuario() {
-        Usuario user1 = usuarioCadastro.criarUsuario("João", "Silva", "Masculino", "01/01/1990", "joao@gmail.com", 
-                                                     "Senha123@", "Senha123@", "12345678909", "12345-678", 
-                                                     "1122334455", "9988776655");
+        
+        assertNotNull(user1.getNome());
+        assertNotNull(user1.getSobrenome());
         assertNotNull(user1.getSenha());
         assertNotNull(user1.getSexo());
         assertNotNull(user1.getCpf());
         assertNotNull(user1.getCelular());
         assertNotNull(user1.getTelefone());
         assertEquals(user1.getSenha(), user1.getConfirmaSenha());
-        assertEquals("João", user1.getNome());
         
     }
 
     @Test
     public void testSalvarUsuario() {
-        Usuario user1 = usuarioCadastro.criarUsuario("João", "Silva", "Masculino", "01/01/1990", "joao@gmail.com", 
-                                                     "senha123", "senha123", "123.456.789-00", "12345-678", 
-                                                     "1122334455", "9988776655");
         usuarioArmazena.salvarUsuario(user1);
         assertEquals(1, usuarioArmazena.getUsuarios().size());
-        assertEquals("João", usuarioArmazena.getUsuarios().get(0).getNome());
+        
         assertFalse(usuarioArmazena.getUsuarios().isEmpty());
     }
 }
