@@ -1,5 +1,3 @@
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class Pet {
 	private String especie;
@@ -13,14 +11,8 @@ public class Pet {
     	this.idade = idade;
     }
     public  String getNome() {
-        String regex = "^(?=.*[a-zA-ZÀ-ÖØ-öø-ÿ])[a-zA-ZÀ-ÖØ-öø-ÿ\\s]{3,32}$";
-        Pattern p = Pattern.compile(regex);
         
-        Matcher m = p.matcher(nome);
-        if (m.matches()) {
-            return nome;
-        }
-        return null;
+        return nome;
     }
 
     public void setNome(String nome) {
@@ -29,13 +21,8 @@ public class Pet {
     }
     
     public  String getEspecie() {
-        String TodasAsEspecies[] = {"Cachorro","Gato","Papagaio","Hamster","Tartaruga"};
-        for(int i = 0; i < TodasAsEspecies.length;i++) {
-        	if(this.especie.equals(TodasAsEspecies[i])) {
-        		return this.especie;
-        	}
-        }
-        return null;
+       
+        return especie;
     }
 
     public void setEspecie(String especie) {
