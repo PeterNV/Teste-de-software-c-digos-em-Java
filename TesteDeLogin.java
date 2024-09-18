@@ -2,65 +2,31 @@ import org.junit.Test;
 import org.junit.Before;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertEquals;
 import java.util.ArrayList;
 
 public class TesteDeLogin {
-	ArrayList<String> email;
-	ArrayList<String> senha;
-	Login  user;
-	
+	private UsuarioCadastro usuarioCadastro;
+	 private UsuarioArmazena usuarioArmazena;
 	  @Before
-	  public void init() {
-		  email = new ArrayList<String>();
-	      senha = new ArrayList<String>();
-		  user = new Login();
-		 
-	  }
-
-	  @Test
-	  public void CamposEmBranco() {
-	    assertTrue(user.Email(email).isEmpty());
-	    assertTrue(user.Senha(senha).isEmpty());
-	  }
-
-	  @Test
-	  public void LoginValido() {
-		  
-		user.Email(email).add(0, "pedro@gmail.com");
-		user.Senha(senha).add(0, "Pato136#");
-		assertFalse(user.Email(email).isEmpty());
-	    assertFalse(user.Senha(senha).isEmpty());
-		assertTrue(user.Email(email).get(0).contains("@"));
-		assertEquals(user.Senha(senha).get(0).length(),8);
+	    public void init() {
+	    	usuarioArmazena = new UsuarioArmazena();
+	        usuarioCadastro = new UsuarioCadastro(usuarioArmazena);
+	    }
+	    
+	@Test
+	public void testeLoginSucesso() {
+		Usuario user1 = new Usuario("João", "Silva Vila", "Masculino", "01/01/1990", "joao@gmail.com", 
+                "Senha123@", "Senha123@", "12345678909", "12345-678", 
+                "1122334455", "9988776655");
+		Usuario u = this.usuarioCadastro.criarUsuario(user1);
+        
 		
-		user.Email(email).add(0, "pedro@gmail.com");
-		user.Senha(senha).add(0, "Pato136#Pato136#");
-		assertFalse(user.Email(email).isEmpty());
-	    assertFalse(user.Senha(senha).isEmpty());
+		Login login = new Login(usuarioArmazena);
 		
-		assertTrue(user.Email(email).get(0).contains("@"));
-		assertEquals(user.Senha(senha).get(0).length(),16);
-		
-	  }
-
-	  @Test
-	  public void LoginInvalido() {
-		user.Email(email).add(0, "pedrogmail.com");
-		user.Senha(senha).add(0, "Pato136");
-		
-		assertFalse(user.Email(email).isEmpty());
-	    assertFalse(user.Senha(senha).isEmpty());	
-		assertFalse(user.Email(email).get(0).contains("@"));
-		assertEquals(user.Senha(senha).get(0).length(),7);
-			
-		user.Email(email).add(0, "pedrogmail.com");
-		user.Senha(senha).add(0, "Pato136#Pato136#1");
-		
-		assertFalse(user.Email(email).isEmpty());
-	    assertFalse(user.Senha(senha).isEmpty());	
-		assertFalse(user.Email(email).get(0).contains("@"));
-		assertEquals(user.Senha(senha).get(0).length(),17);
-	  }
+		Usuario usuarioLogado = login.Logar(u);
+        assertNotNull(usuarioLogado);
+	}
 
 }
