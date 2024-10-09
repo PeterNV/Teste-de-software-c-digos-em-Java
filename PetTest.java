@@ -1,4 +1,5 @@
 import static org.junit.Assert.assertEquals;
+
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
@@ -41,7 +42,7 @@ public class PetTest {
     
     @Test
     public void testCriarPetComEspecieInvalida() {
-        pet1 = new Pet("Guilbert", "Tigre", 1);
+        pet1 = new Pet("Guilbert", "null", 1);
         Pet u = this.petCadastro.criarPet(pet1);
         
         assertNull(u);
@@ -49,7 +50,7 @@ public class PetTest {
     }
     
     @Test
-    public void testSalvarUsuario() {
+    public void testSalvarPet() {
         petArmazena.salvarPet(pet1);
         assertEquals(1, petArmazena.getPets().size());
         assertFalse(petArmazena.getPets().isEmpty());
